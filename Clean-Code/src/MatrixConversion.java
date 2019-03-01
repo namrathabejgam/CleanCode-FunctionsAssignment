@@ -23,7 +23,7 @@ public class MatrixConversion {
     private final static Logger logger = Logger.getLogger(MatrixConversion.class.getName());
 
     //this method changes the entire matrix as per requirement
-    static int[][] changeMatrix(int[][] matrix,MatrixSize matrixSize){
+    public static int[][] changeMatrix(int[][] matrix,MatrixSize matrixSize){
         boolean firstRowContainsZero=doesFirstRowContainZero(matrix,matrixSize);
         boolean firstColumnContainsZero=doesFirstColumnContainZero(matrix,matrixSize);
         changeFirstRowAndColumn(matrix,matrixSize);
@@ -36,7 +36,7 @@ public class MatrixConversion {
     }
 
     //returns if the first row contains zero
-    static boolean doesFirstRowContainZero(int[][] matrix,MatrixSize matrixSize){
+    private static boolean doesFirstRowContainZero(int[][] matrix,MatrixSize matrixSize){
         boolean rowFlag=false;
         for(int i=0;i<matrixSize.numberOfColumns;i++)
         {
@@ -49,7 +49,7 @@ public class MatrixConversion {
     }
 
     //returns if the first column contains zero
-    static boolean doesFirstColumnContainZero(int[][] matrix,MatrixSize matrixSize){
+    private static boolean doesFirstColumnContainZero(int[][] matrix,MatrixSize matrixSize){
         boolean columnFlag=false;
         for(int i=0;i<matrixSize.numberOfRows;i++){
             if(matrix[i][0]==0){
@@ -62,7 +62,7 @@ public class MatrixConversion {
 
     /*this method changes the element of corresponding first row element and corresponding first
     column element to 0*/
-    static void changeFirstRowAndColumn(int[][] matrix,MatrixSize matrixSize){
+    private static void changeFirstRowAndColumn(int[][] matrix,MatrixSize matrixSize){
         for(int i=1;i<matrixSize.numberOfRows;i++){
             for(int j=1;j<matrixSize.numberOfColumns;j++) {
                 if(matrix[i][j]==0){
@@ -76,7 +76,7 @@ public class MatrixConversion {
     /*this modifies the rest of the matrix except first row and first column,
     according to values set in first row and column
      */
-    static void changeSubMatrix(int[][] matrix,MatrixSize matrixSize){
+    private static void changeSubMatrix(int[][] matrix,MatrixSize matrixSize){
         for(int i=1;i<matrixSize.numberOfRows;i++){
             for(int j=1;j<matrixSize.numberOfColumns;j++){
                 if(matrix[i][0]==0 || matrix[0][j]==0){
@@ -87,7 +87,7 @@ public class MatrixConversion {
     }
 
     //changes the entire first row to zero if atleast one of the elements is 0
-    static void setFirstRowToZero(int[][] matrix,int numberOfColumns){
+    private static void setFirstRowToZero(int[][] matrix,int numberOfColumns){
         for(int i=0;i<numberOfColumns;i++){
             matrix[0][i]=0;
         }
@@ -100,7 +100,7 @@ public class MatrixConversion {
         }
     }
 
-    static void printModifiedMatrix(int[][] matrix,MatrixSize matrixSize){
+    private static void printModifiedMatrix(int[][] matrix,MatrixSize matrixSize){
         String modifiedMatrix="";
         modifiedMatrix+=("\nThe modified matrix is:\n");
         for(int i=0;i<matrixSize.numberOfRows;i++){
@@ -111,7 +111,7 @@ public class MatrixConversion {
         }
         logger.info(modifiedMatrix);
     }
-    static void logError(Exception e) {
+    private static void logError(Exception e) {
         if(e.getClass().getCanonicalName().equalsIgnoreCase("java.lang.NumberFormatException"))
             logger.info("Please make sure you entered a proper number");
         else if(e.getClass().getCanonicalName().equalsIgnoreCase("ImproperInputException"))
@@ -155,3 +155,7 @@ public class MatrixConversion {
         }
     }
 }
+/*
+The space complexity is O(M*N) where M is the number of rows and N is the number of columns.
+Additional space isn't required.
+ */
